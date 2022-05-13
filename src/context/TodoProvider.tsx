@@ -12,7 +12,7 @@ const INITIAL_STATE: TodoState = {
       completed: false,
     },
     {
-      id: "1",
+      id: "2",
       desc: "hacer sprint 3",
       completed: false,
     },
@@ -28,8 +28,12 @@ interface TodoProps {
 export const TodoProvider = ({ children }: TodoProps) => {
   const [todoState, dispatch] = useReducer(todoReducer, INITIAL_STATE);
 
+  const toggleTodo = (id: string) => {
+    dispatch({ type: "toggle/todo", payload: { id } });
+  };
+
   return (
-    <TodoContext.Provider value={{ todoState }}>
+    <TodoContext.Provider value={{ todoState, toggleTodo }}>
       {children}
     </TodoContext.Provider>
   );
